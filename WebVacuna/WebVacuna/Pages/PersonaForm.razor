@@ -1,0 +1,52 @@
+﻿@page "/PersonaForm"
+@using Data
+<h3>PersonaForm</h3>
+
+<EditForm Model="@oPersona">
+    <div class="container-fluid">
+
+        <div class="form-group row mb-1">
+            <label class ="col-sm-3" >DPI</label>
+               <div class="col-sm-9">
+                   <InputText  class="form-control"@bind-Value="@oPersona.Dpi"></InputText>
+               </div>
+        </div>
+
+        <div class="form-group row mb-1">
+            <label class ="col-sm-3" >Primer Nombre</label>
+               <div class="col-sm-9">
+                   <InputText class="form-control"@bind-Value="@oPersona.PrimerNombre"></InputText>
+               </div>
+        </div>
+                <div class="form-group row mb-1">
+            <label class ="col-sm-3" >Segundo Nombre</label>
+               <div class="col-sm-9">
+                   <InputText class="form-control"@bind-Value="@oPersona.SegundoNombre"></InputText>
+               </div>
+        </div>
+                <div class="form-group row mb-1">
+            <label class ="col-sm-3" >Tercer Nombre</label>
+               <div class="col-sm-9">
+                   <InputText class="form-control"@bind-Value="@oPersona.TercerNombre"></InputText>
+               </div>
+        </div>
+                        <div class="form-group row mb-1">
+            <label class ="col-sm-3" >Primer Apellido</label>
+               <div class="col-sm-9">
+                   <InputText class="form-control"@bind-Value="@oPersona.PrimerApellido"></InputText>
+               </div>
+        </div>
+                <div class="form-group row mb-1">
+            <label class ="col-sm-3" >Segundo Apellido</label>
+               <div class="col-sm-9">
+                   <InputText class="form-control"@bind-Value="@oPersona.SegundoApellido"></InputText>
+               </div>
+        </div>
+        
+    </div>
+
+</EditForm>
+
+@code {
+    Persona oPersona = new Persona();
+}

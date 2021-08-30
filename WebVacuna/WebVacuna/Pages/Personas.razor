@@ -1,0 +1,97 @@
+﻿@page "/Personas"
+
+@using System.Net.Http
+@using System.Net.Http.Json
+@using WebVacuna.Data
+@inject HttpClient Http
+<h3>Personas</h3>
+
+<div class ="row">
+    <div class="col-12 text-center text-right"> 
+       <a chref = "PersonaForm"> Nuevo </a>
+    </div>
+
+</div>
+
+<table class="table">
+        <thead>          
+            <tr>
+                <th> DPI</th>
+                <th> Nombre</th>
+                <th> Apellidos</th>
+                <td> Apellido Casada</td>
+                <th> Sexo</th>
+                <th> Estado Civil</th>
+                <th> Direccion</th>
+                <th> Teléfono</th>
+                <th> Fecha Nacimiento</th>
+                <th> Covid19 positivo</th>
+                <th> Fecha De Contagio</th>
+                <th> Tipo Vacuna</th>
+                <th> Fecha Dosis 1</th>
+                <th> Fecha Dosis 2</th>
+                <th> Centro De Servicio</th>
+                <th></th>
+
+            </tr>
+            </thead> 
+    @if (oRespuesta != null && oRespuesta.Data != null)
+    {
+        <tbody>
+        @foreach (var oElement in oRespuesta.Data)   
+    {@*
+         <RadzenGrid AllowFiltering="true" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive"
+                FilterMode="FilterMode.Advanced" AllowPaging="true" PageSize="4"saedf
+                AllowSorting="true" Data="@oElement" TItem="Persona" ColumnWidth="200px">
+        <Columns>
+            <RadzenGridColumn TItem="Persona" Property="Prime" Title="Name" />
+            <RadzenGridColumn TItem="Contact" Property="Phone" Title="Phone" />
+            <RadzenGridColumn TItem="Contact" Property="Address" Title="Address" />
+            <RadzenGridColumn TItem="Contact" Title="Edit">
+                <Template Context="data">
+                    <RadzenLink Path="@($"/contactdetails/{data.Id}")" Text="Edit"></RadzenLink>
+                </Template>
+            </RadzenGridColumn>
+            <RadzenGridColumn TItem="Contact" Title="Delete">
+                <Template Context="data">
+                    <RadzenLink Path="@($"/contactdelete/{data.Id}")" Text="Delete"></RadzenLink>
+                </Template>
+            </RadzenGridColumn>
+
+        </Columns>
+    </RadzenGrid>*@
+            <tr>
+                <td> @oElement.Dpi</td>
+                <td> @oElement.PrimerNombre @oElement.SegundoNombre @oElement.TercerNombre </td>
+                <td> @oElement.PrimerApellido @oElement.SegundoApellido</td>
+                <td> @oElement.ApellidoCasada</td>
+                <td> @oElement.Sexo</td>
+                <td> @oElement.EstadoCivil</td>
+                <td> @oElement.Direccion</td>
+                <td> @oElement.Telefono</td>
+                <td> @oElement.FechaNacimiento</td>
+                <td> @oElement.Covid19positivo</td>
+                <td> @oElement.FechaDeContagio</td>
+                <td> @oElement.TipoVacuna</td>
+                <td> @oElement.FechaDosis1</td>
+                <td> @oElement.FechaDosis2</td>
+                <td> @oElement.CentroDeServicio</td>
+                <td> 
+                    <a>Editar</a>
+                    <a>Eliminar</a>
+
+                </td>
+
+            </tr>
+
+        }
+        </tbody>
+    }
+</table>
+@code {
+    public string Url = "/api/VacunaCovid";
+    public Data.Respuesta oRespuesta = new Data.Respuesta();
+
+    protected override async Task OnInitializedAsync() =>
+        oRespuesta = await Http.GetFromJsonAsync<Respuesta>(Url);
+}
